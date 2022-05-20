@@ -1,0 +1,16 @@
+spring.application.name: apache-camel-poc
+server.port: 8080
+
+logging.level:
+  org.springframework: INFO
+  com.abshekh: DEBUG
+  org.apache.camel.component.resilience: DEBUG
+
+camel:
+  component:
+    kafka:
+      brokers: localhost:9092
+      auto-commit-enable: false
+      allow-manual-commit: true
+      auto-offset-reset: earliest
+      break-on-first-error: false
