@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.kafka.KafkaConstants;
-import org.apache.camel.component.kafka.consumer.KafkaManualCommit;
+import org.apache.camel.component.kafka.KafkaManualCommit;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Component;
 
@@ -62,7 +62,7 @@ public class RetryRoute extends RouteBuilder {
                     exchange.getIn().getHeader(KafkaConstants.MANUAL_COMMIT, KafkaManualCommit.class);
             if (manual != null) {
                 log.info("manually committing the offset for batch");
-                manual.commit();
+                manual.commitSync();
                 log.info("End time is {} ", LocalDateTime.now());
             }
         } else {
